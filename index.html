@@ -1,71 +1,256 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta
+  <meta charset="UTF-8" />
+  <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0">
-    <title>joojle</title>
-    <meta
+        content="width=device-width, initial-scale=1.0"/>
+  <title>joojle</title>
+  <meta
         name="description"
         content="joojle هو محرك بحث ذكي وسريع شبيه بجوجل، يمكنك من خلاله البحث في الويب بسهولة ودقة.">
-    <meta
+  <meta
         name="keywords"
         content="joojle, joojle search, google alternative, محرك بحث, بحث, بحث عربي, بحث سريع, محرك بحث عربي, بديل جوجل, بحث الويب, بحث ذكي, محرك بحث يشبه Google, جوجل, بحث متقدم">
-    <link rel="icon" href="favicon.png" type="image/png">
-    <style>
-        body {
-            background: #fff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+  <link rel="icon" href="favicon.png" type="image/png">
+  <style>
+    body {
+      background: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      text-align: center;
+    }
 
-        .logo {
-            font-size: 92px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
+    header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 15px 30px;
+      font-size: 14px;
+    }
 
-        .blue { color: #4285F4; }
-        .red { color: #EA4335; }
-        .yellow { color: #FBBC05; }
-        .green { color: #34A853; }
+    header a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #000;
+    }
 
-        .search-container {
-            width: 95%;
-            max-width: 1000px;
-        }
+    .logo {
+      font-size: 92px;
+      font-weight: bold;
+      margin-top: 100px;
+    }
 
-        .gsc-control-cse {
-            max-width: 1000px !important;
-            width: 95% !important;
-            margin: 0 auto;
-        }
-    </style>
+    .blue { color: #4285F4; }
+    .red { color: #EA4335; }
+    .yellow { color: #FBBC05; }
+    .green { color: #34A853; }
+
+    .search-box {
+      margin: 30px auto;
+      width: 600px;
+      max-width: 90%;
+    }
+
+    .gcse-searchbox-only {
+      direction: rtl;
+    }
+
+    .gsc-input-box {
+      border-radius: 30px !important;
+      border: 1px solid #ddd !important;
+      padding: 5px 15px !important;
+      box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+    }
+
+    .gsc-input {
+      text-align: right !important;
+    }
+
+    .shortcuts {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .shortcut {
+      text-align: center;
+      color: #333;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .shortcut-circle {
+      width: 60px;
+      height: 60px;
+      background-color: #ffe8dc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      font-size: 24px;
+    }
+
+    .shortcut-circle img {
+      width: 30px;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .shortcut:hover .delete-btn {
+      display: block;
+    }
+
+    .customize {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #ffe8dc;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="logo">
-        <span class="blue">j</span>
-        <span class="red">o</span>
-        <span class="yellow">o</span>
-        <span class="blue">j</span>
-        <span class="green">l</span>
-        <span class="red">e</span>
+  <header>
+    <a href="https://mail.google.com" target="_blank">Gmail</a>
+    <a href="https://images.google.com" target="_blank">صور</a>
+  </header>
+
+  <div class="logo">
+    <span class="blue">j</span>
+    <span class="red">o</span>
+    <span class="yellow">o</span>
+    <span class="blue">j</span>
+    <span class="green">l</span>
+    <span class="red">e</span>
+  </div>
+
+  <div class="search-box">
+    <script async src="https://cse.google.com/cse.js?cx=27cc0569f01f64f4b"></script>
+    <div class="gcse-searchbox-only"></div>
+  </div>
+
+  <div class="shortcuts" id="shortcuts">
+    <!-- يتم ملء الاختصارات هنا -->
+    <div class="shortcut" onclick="addShortcut()">
+      <div class="shortcut-circle">+</div>
+      <div>إضافة اختصار</div>
     </div>
 
-    <div class="search-container">
-        <script async src="https://cse.google.com/cse.js?cx=27cc0569f01f64f4b"></script>
-        <div class="gcse-searchbox-only"></div>
+    <div class="shortcut" onclick="copyLink()">
+      <div class="shortcut-circle">S</div>
+      <div>مشاركة</div>
     </div>
+
+    <div class="shortcut" onclick="window.open('https://chrome.google.com/webstore', '_blank')">
+      <div class="shortcut-circle">
+        <img src="https://ssl.gstatic.com/gb/images/bar/al-icon.png" alt="icon">
+      </div>
+      <div>السوق الإلكتروني</div>
+    </div>
+  </div>
+
+  <div class="customize" onclick="alert('هذه ميزة تخصيص الواجهة قيد التطوير!')">
+    🖌 تخصيص Chrome
+  </div>
+
+  <script>
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("تم نسخ الرابط إلى الحافظة!");
+      });
+    }
+
+    function createShortcutElement(name, url) {
+      const div = document.createElement("div");
+      div.className = "shortcut";
+      div.onclick = () => window.open(url, "_blank");
+
+      const circle = document.createElement("div");
+      circle.className = "shortcut-circle";
+      circle.textContent = name.charAt(0).toUpperCase();
+
+      const label = document.createElement("div");
+      label.textContent = name;
+
+      const del = document.createElement("button");
+      del.className = "delete-btn";
+      del.textContent = "×";
+      del.title = "حذف";
+
+      del.onclick = (e) => {
+        e.stopPropagation(); // يمنع فتح الرابط
+        if (confirm(`هل تريد حذف "${name}"؟`)) {
+          div.remove();
+          let saved = JSON.parse(localStorage.getItem("shortcuts") || "[]");
+          saved = saved.filter(s => s.name !== name || s.url !== url);
+          localStorage.setItem("shortcuts", JSON.stringify(saved));
+        }
+      };
+
+      div.appendChild(circle);
+      div.appendChild(label);
+      div.appendChild(del);
+
+      return div;
+    }
+
+    function addShortcut() {
+      const name = prompt("ما اسم الموقع؟ (مثلاً: يوتيوب)");
+      if (!name) return;
+
+      const url = prompt("ما رابط الموقع؟ (مثلاً: https://youtube.com)");
+      if (!url || !url.startsWith("http")) {
+        alert("يرجى إدخال رابط صحيح يبدأ بـ http");
+        return;
+      }
+
+      const container = document.getElementById("shortcuts");
+      const shortcut = createShortcutElement(name, url);
+      container.insertBefore(shortcut, container.firstChild);
+
+      let saved = JSON.parse(localStorage.getItem("shortcuts") || "[]");
+      saved.push({ name, url });
+      localStorage.setItem("shortcuts", JSON.stringify(saved));
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const saved = JSON.parse(localStorage.getItem("shortcuts") || "[]");
+      const container = document.getElementById("shortcuts");
+
+      saved.reverse().forEach(({ name, url }) => {
+        const shortcut = createShortcutElement(name, url);
+        container.insertBefore(shortcut, container.firstChild);
+      });
+    });
+  </script>
 
 </body>
 </html>
