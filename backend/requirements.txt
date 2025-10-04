@@ -1,0 +1,8 @@
+flask
+requests
+beautifulsoup4
+elasticsearch==7.17.0
+redis
+python-dotenv
+spacy
+urllib3

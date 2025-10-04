@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.17
+    container_name: organized_es
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - osnet
+
+  redis:
+    image: redis:7-alpine
+    container_name: organized_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - osnet
+
+  backend:
+    build: ./backend
+    container_name: organized_backend
+    depends_on:
+      - elasticsearch
+      - redis
+    environment:
+      - ES_HOST=elasticsearch
+      - ES_PORT=9200
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./backend:/app
+    ports:
+      - "5000:5000"
+    networks:
+      - osnet
+
+networks:
+  osnet:
+    driver: bridge
